@@ -1,0 +1,21 @@
+build/
+node_modules/
+shots/
+private/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Logs and local env
+*.log
+.env
+.env.*
+
+# Claude Code: instructions and settings stay local
+CLAUDE.md
+CLAUDE.local.md
+.claude/

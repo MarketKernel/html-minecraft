@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Nothing may leave the page: no fetch, no images or fonts from elsewhere. Block
+     icons are canvas-made data: URLs. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1b2a4a">
+<title>Blockcraft</title>
+<link rel="icon" href="__ICON__">
+<style>/*__STYLES__*/</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<div id="hud">
+  <div class="crosshair"></div>
+  <div id="blockname" class="blockname"></div>
+  <div id="hotbar" class="hotbar"></div>
+  <pre id="debug" class="debug" hidden></pre>
+  <div id="toast" class="toast"></div>
+  <div id="loading" class="loading" hidden>
+    <span>Generating terrain…</span>
+    <div class="bar"><div id="loading-bar"></div></div>
+  </div>
+</div>
+
+<section id="menu" class="screen title">
+  <div class="logo-wrap">
+    <h1 class="logo">BLOCKCRAFT</h1>
+    <div id="splash" class="splash"></div>
+  </div>
+  <div class="panel">
+    <button id="play" class="btn primary">Play</button>
+    <div class="row">
+      <input id="seed" type="text" placeholder="Seed (empty for random)" autocomplete="off" spellcheck="false">
+      <button id="new" class="btn">New world</button>
+    </div>
+    <div id="world-info" class="muted"></div>
+    <button class="btn update" data-update hidden></button>
+  </div>
+  <dl class="keys">
+    <dt>WASD</dt><dd>walk</dd>
+    <dt>Space</dt><dd>jump, twice to fly</dd>
+    <dt>Shift</dt><dd>fly down</dd>
+    <dt>Ctrl / R</dt><dd>sprint</dd>
+    <dt>Left click</dt><dd>break</dd>
+    <dt>Right click</dt><dd>place, light TNT</dd>
+    <dt>Middle click</dt><dd>pick block</dd>
+    <dt>1–9, wheel</dt><dd>choose block</dd>
+    <dt>E</dt><dd>all blocks</dd>
+    <dt>F</dt><dd>fly on/off</dd>
+    <dt>T</dt><dd>hold: time flies</dd>
+    <dt>M · F3</dt><dd>music · debug</dd>
+  </dl>
+  <footer><span id="version"></span> · one HTML file, no network, no libraries</footer>
+</section>
+
+<section id="pause" class="screen dim" hidden>
+  <div class="panel">
+    <h2>Paused</h2>
+    <button id="resume" class="btn primary">Back to game</button>
+    <label class="setting"><span>Render distance <b id="distance-value"></b></span><input id="distance" type="range" min="3" max="16" step="1"></label>
+    <label class="setting"><span>Field of view <b id="fov-value"></b></span><input id="fov" type="range" min="50" max="110" step="1"></label>
+    <label class="check"><input id="sfx" type="checkbox"> Sounds</label>
+    <label class="check"><input id="music" type="checkbox"> Music</label>
+    <button class="btn update" data-update hidden></button>
+    <button id="quit" class="btn">Save and quit to title</button>
+  </div>
+</section>
+
+<section id="inventory" class="screen dim" hidden>
+  <div class="panel wide">
+    <h2>Blocks</h2>
+    <div id="grid" class="grid"></div>
+    <p class="muted">Click a block to put it in the selected slot · E to close</p>
+  </div>
+</section>
+
+<section id="nogl" class="screen" hidden>
+  <div class="panel"><h2>WebGL 2 is needed</h2><p>This browser or device cannot draw the 3D world. Try a current Chrome, Edge, Firefox or Safari.</p></div>
+</section>
+
+<script>/*__APP__*/</script>
+</body>
+</html>

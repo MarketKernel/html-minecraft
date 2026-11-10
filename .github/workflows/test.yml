@@ -1,0 +1,38 @@
+name: test
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      # ubuntu-latest ships Chrome at /usr/bin/google-chrome, where tools/chrome.mjs looks;
+      # WebGL runs on SwiftShader, so no GPU is needed.
+      - run: npm run test:browser
+
+      # The single HTML file must not pull anything off the network.
+      - name: No external references in the build
+        run: |
+          if grep -oE '(src|href)="(https?:)?//[^"]*"' build/blockcraft.html build/pages/index.html; then
+            echo "::error::external resources are left in the build"
+            exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blockcraft
+          path: build/blockcraft.html
