@@ -65,7 +65,8 @@ The build makes two things from the same page:
 
 The browser tests (`tests/app.mjs`, `tests/pwa.mjs`) drive the real page in headless Chrome
 over the DevTools protocol (no puppeteer); set `CHROME=/path/to/chrome` if it is not in the
-usual place.
+usual place. They run only locally: in CI, on a software GPU, the game is too slow for
+their timings.
 
 ## Releases
 
@@ -78,8 +79,8 @@ npm version minor && git push --follow-tags
 
 GitHub Actions:
 
-- `test.yml` — every push: typecheck, unit tests, build, browser tests.
-- `pages.yml` — every push to `main`: the same checks, then `build/pages/` to GitHub Pages
+- `test.yml` — every push: typecheck, unit tests, build, no external references in the build.
+- `pages.yml` — every push to `main`: typecheck, unit tests, build, then `build/pages/` to GitHub Pages
   (Settings → Pages → Source: GitHub Actions).
 - `release.yml` — a `v*` tag: checks that it matches `package.json`, then attaches
   `blockcraft-<tag>.html` and `SHA256SUMS.txt` to the release.

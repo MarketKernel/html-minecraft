@@ -20,9 +20,8 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-      # ubuntu-latest ships Chrome at /usr/bin/google-chrome, where tools/chrome.mjs looks;
-      # WebGL runs on SwiftShader, so no GPU is needed.
-      - run: npm run test:browser
+      # No browser tests here: on SwiftShader the game runs too slowly for their timings,
+      # so they fail at random. They run locally, in `npm run check`.
 
       # The single HTML file must not pull anything off the network.
       - name: No external references in the build

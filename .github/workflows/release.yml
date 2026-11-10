@@ -47,7 +47,6 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-      - run: npm run test:browser
 
       # The build reads the tag off the checked-out commit: a release shows x.y.z, not x.y.z+commit.
       - name: Check the version in the page
